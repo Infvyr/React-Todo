@@ -1,41 +1,73 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './reset.css';
 import './index.css';
 
+const todoData = [
+	{
+		id: 1,
+		title: 'Finish React Series',
+		isComplete: false,
+	},
+	{
+		id: 2,
+		title: 'Go Grocery',
+		isComplete: true,
+	},
+	{
+		id: 3,
+		title: 'Take over world',
+		isComplete: false,
+	},
+];
+
 function App() {
-	const [todos, setTodos] = useState([
-		{
-			id: 1,
-			title: 'Finish React Series',
-			isComplete: false,
-		},
-		{
-			id: 2,
-			title: 'Go Grocery',
-			isComplete: true,
-		},
-		{
-			id: 3,
-			title: 'Take over world',
-			isComplete: false,
-		},
-	]);
+	const [todos, setTodos] = useState([]);
+	const [todoInput, setTodoInput] = useState('');
+	const [idForTodo, setIdForTodo] = useState(4);
+
+	useEffect(() => {
+		console.log('Import data');
+		setTodos(todoData);
+	}, []);
+
+	const handleInput = ({ target }) => {
+		setTodoInput(target.value);
+	};
+
+	const addTodo = e => {
+		e.preventDefault();
+
+		if (todoInput.trim().length === 0) return;
+
+		setTodos([
+			...todos,
+			{
+				id: idForTodo,
+				title: todoInput,
+				isComplete: false,
+			},
+		]);
+
+		setTodoInput('');
+		setIdForTodo(prevIdForTodo => prevIdForTodo + 1);
+	};
 
 	return (
 		<div className="todo-app-container">
 			<div className="todo-app">
 				<h2>Todo App</h2>
-				<form action="#">
+				<form action="#" onSubmit={addTodo}>
 					<input
 						type="text"
 						className="todo-input"
 						placeholder="What do you need to do?"
+						onChange={handleInput}
 					/>
 				</form>
 
 				<ul className="todo-list">
-					{todos.map((todo, index) => (
-						<li className="todo-item-container">
+					{todos.map(todo => (
+						<li className="todo-item-container" key={todo.id}>
 							<div className="todo-item">
 								<input type="checkbox" />
 								<span className="todo-item-label">{todo.title}</span>
