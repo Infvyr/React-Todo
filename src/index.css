@@ -127,6 +127,13 @@ h2 {
   border-top: 1px solid lightgray;
 }
 
+.check-all-buttons,
+.todo-filters{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .other-buttons-container {
   display: flex;
   justify-content: space-between;

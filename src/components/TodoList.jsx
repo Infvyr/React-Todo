@@ -1,16 +1,28 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import TodoCheck from './TodoCheck';
+import TodoClearCompleted from './TodoClearCompleted';
+import TodoItemsRemaining from './TodoItemsRemaining';
+import TodoFilter from './TodoFilter';
 
 const TodoList = ({
-	todos,
+	// todos,
+	todosFiltered,
 	completeTodo,
 	markAsEditing,
 	updateTodo,
 	deleteTodo,
+	remaining,
+	clearCompleted,
+	checkAllTodos,
+	unCheckAllTodos,
 }) => {
+	const [filter, setFilter] = useState('all');
+
 	return (
 		<>
 			<ul className="todo-list">
-				{todos.map(todo => (
+				{todosFiltered(filter).map(todo => (
 					<li className="todo-item-container" key={todo.id}>
 						<div className="todo-item">
 							<input
@@ -60,23 +72,21 @@ const TodoList = ({
 			</ul>
 
 			<div className="check-all-container">
-				<div>
-					<div className="button">Check All</div>
-				</div>
-
-				<span>3 items remaining</span>
+				<TodoCheck
+					checkAllTodos={checkAllTodos}
+					unCheckAllTodos={unCheckAllTodos}
+				/>
+				<TodoItemsRemaining remaining={remaining} />
 			</div>
 
 			<div className="other-buttons-container">
+				<TodoFilter
+					todosFiltered={todosFiltered}
+					filter={filter}
+					setFilter={setFilter}
+				/>
 				<div>
-					<button className="button filter-button filter-button-active">
-						All
-					</button>
-					<button className="button filter-button">Active</button>
-					<button className="button filter-button">Completed</button>
-				</div>
-				<div>
-					<button className="button">Clear completed</button>
+					<TodoClearCompleted clearCompleted={clearCompleted} />
 				</div>
 			</div>
 		</>
@@ -84,11 +94,16 @@ const TodoList = ({
 };
 
 TodoList.propTypes = {
-	todos: PropTypes.array.isRequired,
+	// todos: PropTypes.array.isRequired,
+	todosFiltered: PropTypes.func.isRequired,
 	completeTodo: PropTypes.func.isRequired,
 	markAsEditing: PropTypes.func.isRequired,
 	updateTodo: PropTypes.func.isRequired,
 	deleteTodo: PropTypes.func.isRequired,
+	remaining: PropTypes.func.isRequired,
+	clearCompleted: PropTypes.func.isRequired,
+	checkAllTodos: PropTypes.func.isRequired,
+	unCheckAllTodos: PropTypes.func.isRequired,
 };
 
 export default TodoList;

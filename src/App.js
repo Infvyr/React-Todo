@@ -88,6 +88,43 @@ function App() {
 		setTodos(updatedTodos);
 	};
 
+	const identifyRemainingTodoItems = () => {
+		return todos.filter(todo => !todo.isComplete).length;
+	};
+
+	const clearCompleted = () => {
+		setTodos([...todos].filter(todo => !todo.isComplete));
+	};
+
+	const checkAllTodos = () => {
+		const updatedTodos = todos.map(todo => {
+			todo.isComplete = true;
+			return todo;
+		});
+
+		setTodos(updatedTodos);
+	};
+
+	const unCheckAllTodos = () => {
+		const updatedTodos = todos.map(todo => {
+			todo.isComplete = false;
+			return todo;
+		});
+
+		setTodos(updatedTodos);
+	};
+
+	const todosFiltered = filter => {
+		switch (filter) {
+			case 'active':
+				return todos.filter(todo => !todo.isComplete);
+			case 'completed':
+				return todos.filter(todo => todo.isComplete);
+			default:
+				return todos;
+		}
+	};
+
 	return (
 		<div className="todo-app-container">
 			<div className="todo-app">
@@ -101,6 +138,11 @@ function App() {
 						markAsEditing={markAsEditing}
 						updateTodo={updateTodo}
 						deleteTodo={deleteTodo}
+						remaining={identifyRemainingTodoItems}
+						clearCompleted={clearCompleted}
+						checkAllTodos={checkAllTodos}
+						unCheckAllTodos={unCheckAllTodos}
+						todosFiltered={todosFiltered}
 					/>
 				) : (
 					<NoTodos />
