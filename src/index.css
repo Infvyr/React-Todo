@@ -50,7 +50,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 24px;
+  margin-top: 15px;
 }
 
 .todo-item {
@@ -62,7 +62,8 @@ h2 {
 }
 
 .todo-item-label {
-  margin-left: 16px;
+  margin-left: 5px;
+  padding: 6px 10px;
 }
 
 .todo-item-input {
@@ -134,4 +135,13 @@ h2 {
   margin-top: 22px;
   padding-top: 16px;
   border-top: 1px solid lightgray;
+}
+
+.no-todos-container{
+  margin: 2rem auto 1rem;
+  text-align: center;
+}
+
+.no-todos-container p{
+  margin-top: 1rem;
 }
