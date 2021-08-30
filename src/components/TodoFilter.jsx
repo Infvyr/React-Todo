@@ -1,6 +1,9 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { TodosContext } from '../context/TodosContext';
 
-const TodoFilters = ({ todosFiltered, filter, setFilter }) => {
+const TodoFilters = () => {
+	const { filter, setFilter, todosFiltered } = useContext(TodosContext);
+
 	return (
 		<div className="todo-filters">
 			<button
@@ -9,7 +12,7 @@ const TodoFilters = ({ todosFiltered, filter, setFilter }) => {
 				}`}
 				onClick={() => {
 					setFilter('all');
-					todosFiltered('all');
+					todosFiltered();
 				}}>
 				All
 			</button>
@@ -19,7 +22,7 @@ const TodoFilters = ({ todosFiltered, filter, setFilter }) => {
 				}`}
 				onClick={() => {
 					setFilter('active');
-					todosFiltered('active');
+					todosFiltered();
 				}}>
 				Active
 			</button>
@@ -29,18 +32,12 @@ const TodoFilters = ({ todosFiltered, filter, setFilter }) => {
 				}`}
 				onClick={() => {
 					setFilter('completed');
-					todosFiltered('completed');
+					todosFiltered();
 				}}>
 				Completed
 			</button>
 		</div>
 	);
-};
-
-TodoFilters.propTypes = {
-	todosFiltered: PropTypes.func.isRequired,
-	filter: PropTypes.string.isRequired,
-	setFilter: PropTypes.func.isRequired,
 };
 
 export default TodoFilters;

@@ -1,28 +1,57 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { TodosContext } from '../context/TodosContext';
 import TodoCheck from './TodoCheck';
 import TodoClearCompleted from './TodoClearCompleted';
 import TodoItemsRemaining from './TodoItemsRemaining';
 import TodoFilter from './TodoFilter';
 
-const TodoList = ({
-	// todos,
-	todosFiltered,
-	completeTodo,
-	markAsEditing,
-	updateTodo,
-	deleteTodo,
-	remaining,
-	clearCompleted,
-	checkAllTodos,
-	unCheckAllTodos,
-}) => {
-	const [filter, setFilter] = useState('all');
+const TodoList = () => {
+	const { todosFiltered, setTodos, todos } = useContext(TodosContext);
+
+	const deleteTodo = id => {
+		setTodos([...todos].filter(todo => todo.id !== id));
+	};
+
+	const completeTodo = id => {
+		const updatedTodos = todos.map(todo => {
+			if (todo.id === id) todo.isComplete = !todo.isComplete;
+
+			return todo;
+		});
+
+		setTodos(updatedTodos);
+	};
+
+	const markAsEditing = id => {
+		const updatedTodos = todos.map(todo => {
+			if (todo.id === id) todo.isEditing = true;
+
+			return todo;
+		});
+
+		setTodos(updatedTodos);
+	};
+
+	const updateTodo = (e, id) => {
+		const updatedTodos = todos.map(todo => {
+			if (todo.id === id) {
+				if (e.target.value.trim().length === 0 || e.key === 'Escape') {
+					todo.isEditing = false;
+					return todo;
+				}
+				todo.title = e.target.value;
+				todo.isEditing = false;
+			}
+			return todo;
+		});
+
+		setTodos(updatedTodos);
+	};
 
 	return (
 		<>
 			<ul className="todo-list">
-				{todosFiltered(filter).map(todo => (
+				{todosFiltered().map(todo => (
 					<li className="todo-item-container" key={todo.id}>
 						<div className="todo-item">
 							<input
@@ -72,38 +101,18 @@ const TodoList = ({
 			</ul>
 
 			<div className="check-all-container">
-				<TodoCheck
-					checkAllTodos={checkAllTodos}
-					unCheckAllTodos={unCheckAllTodos}
-				/>
-				<TodoItemsRemaining remaining={remaining} />
+				<TodoCheck />
+				<TodoItemsRemaining />
 			</div>
 
 			<div className="other-buttons-container">
-				<TodoFilter
-					todosFiltered={todosFiltered}
-					filter={filter}
-					setFilter={setFilter}
-				/>
+				<TodoFilter />
 				<div>
-					<TodoClearCompleted clearCompleted={clearCompleted} />
+					<TodoClearCompleted />
 				</div>
 			</div>
 		</>
 	);
-};
-
-TodoList.propTypes = {
-	// todos: PropTypes.array.isRequired,
-	todosFiltered: PropTypes.func.isRequired,
-	completeTodo: PropTypes.func.isRequired,
-	markAsEditing: PropTypes.func.isRequired,
-	updateTodo: PropTypes.func.isRequired,
-	deleteTodo: PropTypes.func.isRequired,
-	remaining: PropTypes.number.isRequired,
-	clearCompleted: PropTypes.func.isRequired,
-	checkAllTodos: PropTypes.func.isRequired,
-	unCheckAllTodos: PropTypes.func.isRequired,
 };
 
 export default TodoList;
