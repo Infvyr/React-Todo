@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import './reset.css';
 import './index.css';
 
@@ -6,41 +7,26 @@ import NoTodos from './components/NoTodos';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 
-const todoData = [
-	{
-		id: 1,
-		title: 'Finish React Series',
-		isComplete: false,
-		isEditing: false,
-	},
-	{
-		id: 2,
-		title: 'Go Grocery',
-		isComplete: true,
-		isEditing: false,
-	},
-	{
-		id: 3,
-		title: 'Take over world',
-		isComplete: false,
-		isEditing: false,
-	},
-];
+// const todoData = [];
 
 function App() {
-	const [todos, setTodos] = useState(() => []);
-	const [idForTodo, setIdForTodo] = useState(4);
-	const [name, setName] = useState('');
+	const [todos, setTodos] = useLocalStorage('todos', []);
+	const [idForTodo, setIdForTodo] = useLocalStorage('idForTodo', 1);
+	const [name, setName] = useLocalStorage('name', '');
 
 	let nameInputRef = useRef();
 
-	useEffect(() => {
-		setTodos(todoData);
-	}, []);
+	// useEffect(() => {
+	// 	setTodos(todoData);
+	// }, []);
 
 	useEffect(() => {
 		nameInputRef.current.focus();
 	}, []);
+
+	const handleNameInput = ({ target: { value } }) => {
+		setName(value);
+	};
 
 	const addTodo = title => {
 		setTodos([
@@ -145,7 +131,7 @@ function App() {
 							className="todo-input"
 							placeholder="Type here your name..."
 							value={name}
-							onChange={e => setName(e.target.value)}
+							onChange={handleNameInput}
 						/>
 					</form>
 					{name && (
