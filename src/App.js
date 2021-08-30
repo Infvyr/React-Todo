@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import './reset.css';
 import './index.css';
 
@@ -28,11 +28,18 @@ const todoData = [
 ];
 
 function App() {
-	const [todos, setTodos] = useState([]);
+	const [todos, setTodos] = useState(() => []);
 	const [idForTodo, setIdForTodo] = useState(4);
+	const [name, setName] = useState('');
+
+	let nameInputRef = useRef();
 
 	useEffect(() => {
 		setTodos(todoData);
+	}, []);
+
+	useEffect(() => {
+		nameInputRef.current.focus();
 	}, []);
 
 	const addTodo = title => {
@@ -88,9 +95,10 @@ function App() {
 		setTodos(updatedTodos);
 	};
 
-	const identifyRemainingTodoItems = () => {
+	const calculateRemainingItems = () => {
 		return todos.filter(todo => !todo.isComplete).length;
 	};
+	const remaining = useMemo(calculateRemainingItems, [todos]);
 
 	const clearCompleted = () => {
 		setTodos([...todos].filter(todo => !todo.isComplete));
@@ -128,6 +136,24 @@ function App() {
 	return (
 		<div className="todo-app-container">
 			<div className="todo-app">
+				<div className="name-container">
+					<h3>What's your name?</h3>
+					<form action="#">
+						<input
+							type="text"
+							ref={nameInputRef}
+							className="todo-input"
+							placeholder="Type here your name..."
+							value={name}
+							onChange={e => setName(e.target.value)}
+						/>
+					</form>
+					{name && (
+						<p>
+							Hello, <b>{name}</b>
+						</p>
+					)}
+				</div>
 				<h2>Todo App</h2>
 				<TodoForm addTodo={addTodo} />
 
@@ -138,7 +164,7 @@ function App() {
 						markAsEditing={markAsEditing}
 						updateTodo={updateTodo}
 						deleteTodo={deleteTodo}
-						remaining={identifyRemainingTodoItems}
+						remaining={remaining}
 						clearCompleted={clearCompleted}
 						checkAllTodos={checkAllTodos}
 						unCheckAllTodos={unCheckAllTodos}
