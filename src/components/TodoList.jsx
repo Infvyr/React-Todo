@@ -1,9 +1,12 @@
 import { useContext } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { TodosContext } from '../context/TodosContext';
+
 import TodoCheck from './TodoCheck';
 import TodoClearCompleted from './TodoClearCompleted';
 import TodoItemsRemaining from './TodoItemsRemaining';
 import TodoFilter from './TodoFilter';
+
 
 const TodoList = () => {
 	const { todosFiltered, setTodos, todos } = useContext(TodosContext);
@@ -50,55 +53,60 @@ const TodoList = () => {
 
 	return (
 		<>
-			<ul className="todo-list">
+			<TransitionGroup 
+				component="ul"
+				className="todo-list"
+			>
 				{todosFiltered().map(todo => (
-					<li className="todo-item-container" key={todo.id}>
-						<div className="todo-item">
-							<input
-								type="checkbox"
-								checked={todo.isComplete ? true : false}
-								onChange={() => completeTodo(todo.id)}
-							/>
-							{!todo.isEditing ? (
-								<span
-									className={`todo-item-label ${
-										todo.isComplete ? 'line-through' : ''
-									}`}
-									onDoubleClick={() => markAsEditing(todo.id)}>
-									{todo.title}
-								</span>
-							) : (
+					<CSSTransition key={todo.id} timeout={300} classNames="item">
+						<li className="todo-item-container">
+							<div className="todo-item">
 								<input
-									type="text"
-									className="todo-item-input"
-									defaultValue={todo.title}
-									onBlur={e => updateTodo(e, todo.id)}
-									onKeyDown={e => {
-										if (e.key === 'Enter' || e.key === 'Escape') {
-											updateTodo(e, todo.id);
-										}
-									}}
-									autoFocus
+									type="checkbox"
+									checked={todo.isComplete ? true : false}
+									onChange={() => completeTodo(todo.id)}
 								/>
-							)}
-						</div>
-						<button className="x-button" onClick={() => deleteTodo(todo.id)}>
-							<svg
-								className="x-button-icon"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor">
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M6 18L18 6M6 6l12 12"
-								/>
-							</svg>
-						</button>
-					</li>
+								{!todo.isEditing ? (
+									<span
+										className={`todo-item-label ${
+											todo.isComplete ? 'line-through' : ''
+										}`}
+										onDoubleClick={() => markAsEditing(todo.id)}>
+										{todo.title}
+									</span>
+								) : (
+									<input
+										type="text"
+										className="todo-item-input"
+										defaultValue={todo.title}
+										onBlur={e => updateTodo(e, todo.id)}
+										onKeyDown={e => {
+											if (e.key === 'Enter' || e.key === 'Escape') {
+												updateTodo(e, todo.id);
+											}
+										}}
+										autoFocus
+									/>
+								)}
+							</div>
+							<button className="x-button" onClick={() => deleteTodo(todo.id)}>
+								<svg
+									className="x-button-icon"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor">
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</svg>
+							</button>
+						</li>
+					</CSSTransition>
 				))}
-			</ul>
+			</TransitionGroup>
 
 			<div className="check-all-container">
 				<TodoCheck />

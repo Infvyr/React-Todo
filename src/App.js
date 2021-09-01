@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { TodosContext } from './context/TodosContext';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 import './reset.css';
 import './index.css';
@@ -61,16 +62,29 @@ function App() {
 								onChange={handleNameInput}
 							/>
 						</form>
-						{name && (
-							<p>
-								Hello, <b>{name}</b>
-							</p>
-						)}
+						<CSSTransition
+							in={name.length > 0}
+							timeout={300}
+							classNames="fade"
+							unmountOnExit
+						>
+						<p>Hello, <b>{name}</b></p>
+						</CSSTransition>
+						
 					</div>
 					<h2>Todo App</h2>
 					<TodoForm />
 
-					{todos.length > 0 ? <TodoList /> : <NoTodos />}
+					<SwitchTransition mode="out-in">
+						<CSSTransition 
+							key={todos.length > 0}
+							timeout={300}
+							classNames="item"
+							unmountOnExit
+						>
+						{todos.length > 0 ? <TodoList /> : <NoTodos />}
+						</CSSTransition>
+					</SwitchTransition>
 				</div>
 			</div>
 		</TodosContext.Provider>
