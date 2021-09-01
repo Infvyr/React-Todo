@@ -220,10 +220,6 @@ button:not(.button):focus{
   transition: fill 300ms ease-in-out;
 }
 
-<<<<<<< HEAD
-
-/* Transitions */
-=======
 /* Pages */
 .navigation{
   background-color: #fff;
@@ -273,7 +269,6 @@ button:not(.button):focus{
 
 /* Transitions */
 
->>>>>>> dev
 .item-enter {
   opacity: 0;
   transform: translateX(-20px);
@@ -315,8 +310,4 @@ button:not(.button):focus{
 .fade-enter-active,
 .fade-exit-active{
   transition: opacity 300ms;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dev
