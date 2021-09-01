@@ -27,7 +27,14 @@ const Root = () => {
 				<div className="main-app">
 					<Switch>
 						{routes.map(({ path, component, exact }) => {
-							return <Route path={path} component={component} exact={exact} />;
+							return (
+								<Route
+									key={path}
+									path={path}
+									component={component}
+									exact={exact}
+								/>
+							);
 						})}
 						<Route path="*">
 							<Redirect to="/" />
