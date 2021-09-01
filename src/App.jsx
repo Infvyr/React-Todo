@@ -3,9 +3,6 @@ import { TodosContext } from './context/TodosContext';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
-import './reset.css';
-import './index.css';
-
 import NoTodos from './components/NoTodos';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
@@ -66,23 +63,22 @@ function App() {
 							in={name.length > 0}
 							timeout={300}
 							classNames="fade"
-							unmountOnExit
-						>
-						<p>Hello, <b>{name}</b></p>
+							unmountOnExit>
+							<p>
+								Hello, <b>{name}</b>
+							</p>
 						</CSSTransition>
-						
 					</div>
 					<h2>Todo App</h2>
 					<TodoForm />
 
 					<SwitchTransition mode="out-in">
-						<CSSTransition 
+						<CSSTransition
 							key={todos.length > 0}
 							timeout={300}
 							classNames="item"
-							unmountOnExit
-						>
-						{todos.length > 0 ? <TodoList /> : <NoTodos />}
+							unmountOnExit>
+							{todos.length > 0 ? <TodoList /> : <NoTodos />}
 						</CSSTransition>
 					</SwitchTransition>
 				</div>
