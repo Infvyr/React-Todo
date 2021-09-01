@@ -78,21 +78,28 @@ h2 {
   text-decoration: line-through;
 }
 
-.x-button {
-  background-color: transparent;
+.todo-list .x-button {
+  padding: 0;
+  width: 40px;
   color: #6B7280;
   border: none;
   cursor: pointer;
 }
 
-.x-button-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+.todo-list .x-button,
+.todo-list .x-button:hover,
+.todo-list .x-button:focus{
+  background-color: transparent;
 }
 
-.x-button:hover .x-button-icon,
-.x-button:focus .x-button-icon{
-  stroke: white;
+.todo-list  .x-button-icon {
+  height: 1.5rem;
+  transition: stroke 150ms ease-in;
+}
+
+.todo-list .x-button:hover .x-button-icon,
+.todo-list .x-button:focus .x-button-icon{
+  stroke: rgb(238, 69, 69);
 }
 
 .button {
@@ -181,6 +188,80 @@ button:not(.button){
 
 button:not(.button):hover,
 button:not(.button):focus{
-  background-color: darkgray;
+  background-color: lightgray;
   color: white;
+}
+
+.todo-form-app{
+  position: relative;
+}
+
+.todo-form-app .todo-form-app-submit{
+  padding: 8px;
+  position: absolute;
+  top: 16px;
+  right: 0;
+  width: 51px;
+  height: 51px;
+  background-color: transparent;
+}
+
+.todo-form-app-submit:hover,
+.todo-form-app-submit:focus{
+  background-color: darkgray;
+}
+
+.todo-form-app-submit:hover .svg-icon-submit,
+.todo-form-app-submit:focus .svg-icon-submit{
+  fill: white;
+}
+
+.svg-icon-submit{
+  fill: #6B7280;
+  transition: fill 300ms ease-in-out;
+}
+
+
+/* Transitions */
+.item-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.item-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.item-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.item-exit-active {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+.fade-enter{
+  opacity: 0;
+}
+
+.fade-exit{
+  opacity: 1;
+}
+
+.fade-enter-active{
+  opacity: 1;
+}
+
+.fade-exit-active{
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-exit-active{
+  transition: opacity 300ms;
 }
