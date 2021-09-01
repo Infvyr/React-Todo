@@ -235,18 +235,26 @@ button:not(.button):focus{
   padding: 2rem .5rem;
   display: block;
   font-size: 1.5rem;
-  color: darkblue;
+  color: #6B7280;
   text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-size: 0% 2px;
   background-repeat: no-repeat;
-  background-size: 0;
-  
+  transition: background-size 300ms ease;
 }
 
-.navigation a:hover{
+.navigation a:hover,
+.navigation a:focus{
+  background-size: 100% 2px;
 }
 
 .navigation li:not(:last-child){
   margin-right: 30px;
+}
+
+.navigation .active{
+  background-size: 100% 2px;
 }
 
 .main-app{
