@@ -69,7 +69,7 @@ function App() {
 							</p>
 						</CSSTransition>
 					</div>
-					
+					<h2>Todo App</h2>
 					<TodoForm />
 
 					<SwitchTransition mode="out-in">

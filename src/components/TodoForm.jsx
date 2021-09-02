@@ -28,8 +28,6 @@ const TodoForm = () => {
 	};
 
 	return (
-		<>
-		<h2>Todo App</h2>
 		<form action="#" className="todo-form-app" onSubmit={addTodo}>
 			<input
 				type="text"
@@ -44,7 +42,6 @@ const TodoForm = () => {
 			</svg>
 			</button>
 		</form>
-		</>
 	);
 };
 
