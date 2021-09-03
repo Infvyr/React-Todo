@@ -7,7 +7,7 @@ import {
 
 import NavigationBar from './components/NavigationBar';
 import App from './App';
-import { About as AboutPage } from './pages/About';
+import { Blog as BlogPage } from './pages/Blog';
 import { Contact as ContactPage } from './pages/Contact';
 
 import './reset.css';
@@ -16,7 +16,7 @@ import './index.css';
 const Root = () => {
 	const routes = [
 		{ path: '/', name: 'Home', component: App, exact: true },
-		{ path: '/about', name: 'About', component: AboutPage, exact: true },
+		{ path: '/blog', name: 'Blog', component: BlogPage, exact: true },
 		{ path: '/contact', name: 'Contact', component: ContactPage, exact: true },
 	];
 
