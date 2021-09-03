@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { TodosContext } from '../context/TodosContext';
 
 const TodoForm = () => {
@@ -28,7 +28,7 @@ const TodoForm = () => {
 	};
 
 	return (
-		<React.Fragment>
+		<>
 			<h2>Todo App</h2>
 			<form action="#" className="todo-form-app" onSubmit={addTodo}>
 				<input
@@ -47,7 +47,7 @@ const TodoForm = () => {
 					</svg>
 				</button>
 			</form>
-		</React.Fragment>
+		</>
 	);
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TodosContext } from './context/TodosContext';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';

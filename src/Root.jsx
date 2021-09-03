@@ -1,4 +1,3 @@
-import React from "react";
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -23,7 +22,7 @@ const Root = () => {
 
 	return (
 		<Router>
-			<React.Fragment>
+			<>
 				<NavigationBar />
 				<div className="main-app">
 					<Switch>
@@ -42,7 +41,7 @@ const Root = () => {
 						</Route>
 					</Switch>
 				</div>
-			</React.Fragment>
+			</>
 		</Router>
 	);
 };
