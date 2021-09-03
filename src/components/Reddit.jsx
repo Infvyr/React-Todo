@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
+=======
+import { useState } from 'react';
+>>>>>>> dev
 import useFetch from '../hooks/useFetch';
 import RedditArticle from './RedditArticle';
 
@@ -15,12 +19,12 @@ const Reddit = () => {
 	}
 
 	return (
-		<React.Fragment>
+		<>
 			{isPending && <div className="loading">Fetching Reddit API data...</div>}
 			{error && <div className="error">{error || 'Something went wrong!'}</div>}
 
 			{posts && (
-				<React.Fragment>
+				<>
 					<div className="reddit-articles">
 						{posts.data.children
 							.slice(0, visible)
@@ -58,9 +62,9 @@ const Reddit = () => {
 							</button>
 						</div>
 					)}
-				</React.Fragment>
+				</>
 			)}
-		</React.Fragment>
+		</>
 	);
 };
 
