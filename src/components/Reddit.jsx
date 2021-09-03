@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-=======
 import { useState } from 'react';
->>>>>>> dev
 import useFetch from '../hooks/useFetch';
 import RedditArticle from './RedditArticle';
 
