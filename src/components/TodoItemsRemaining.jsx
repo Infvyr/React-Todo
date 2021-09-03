@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { TodosContext } from '../context/TodosContext';
 
 const TodoItemsRemaining = () => {

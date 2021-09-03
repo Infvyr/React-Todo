@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { TodosContext } from '../context/TodosContext';
 
@@ -6,7 +6,6 @@ import TodoCheck from './TodoCheck';
 import TodoClearCompleted from './TodoClearCompleted';
 import TodoItemsRemaining from './TodoItemsRemaining';
 import TodoFilter from './TodoFilter';
-
 
 const TodoList = () => {
 	const { todosFiltered, setTodos, todos } = useContext(TodosContext);
@@ -52,11 +51,8 @@ const TodoList = () => {
 	};
 
 	return (
-		<React.Fragment>
-			<TransitionGroup 
-				component="ul"
-				className="todo-list"
-			>
+		<>
+			<TransitionGroup component="ul" className="todo-list">
 				{todosFiltered().map(todo => (
 					<CSSTransition key={todo.id} timeout={300} classNames="item">
 						<li className="todo-item-container">
@@ -119,7 +115,7 @@ const TodoList = () => {
 					<TodoClearCompleted />
 				</div>
 			</div>
-		</React.Fragment>
+		</>
 	);
 };
 
