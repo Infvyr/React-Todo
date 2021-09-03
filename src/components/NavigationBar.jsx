@@ -1,3 +1,4 @@
+import React from "react";
 import { NavLink } from 'react-router-dom';
 
 const NavigationBar = () => {
@@ -10,8 +11,8 @@ const NavigationBar = () => {
 					</NavLink>
 				</li>
 				<li>
-					<NavLink to="/about" activeClassName="active">
-						About
+					<NavLink to="/blog" activeClassName="active">
+						Blog
 					</NavLink>
 				</li>
 				<li>

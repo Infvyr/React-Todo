@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { TodosContext } from '../context/TodosContext';
 
@@ -52,7 +52,7 @@ const TodoList = () => {
 	};
 
 	return (
-		<>
+		<React.Fragment>
 			<TransitionGroup 
 				component="ul"
 				className="todo-list"
@@ -119,7 +119,7 @@ const TodoList = () => {
 					<TodoClearCompleted />
 				</div>
 			</div>
-		</>
+		</React.Fragment>
 	);
 };
 
