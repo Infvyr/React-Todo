@@ -10,8 +10,8 @@ const NavigationBar = () => {
 					</NavLink>
 				</li>
 				<li>
-					<NavLink to="/about" activeClassName="active">
-						About
+					<NavLink to="/blog" activeClassName="active">
+						Blog
 					</NavLink>
 				</li>
 				<li>

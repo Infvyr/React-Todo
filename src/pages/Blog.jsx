@@ -1,6 +1,6 @@
 import Reddit from "../components/Reddit";
 
-export const About = () => {
+export const Blog = () => {
     return (
         <div className="container">
             <Reddit />
