@@ -334,6 +334,12 @@ input[type="text"]:focus-visible{
   outline-color: lightskyblue;
 }
 
+.error{
+  margin: 15px;
+  color: red;
+  font-size: 1.75rem;
+}
+
 /* Articles */
 
 .reddit-articles{
