@@ -1,14 +1,32 @@
 import { useState } from 'react';
-import useFetch from '../hooks/useFetch';
+import { useQuery } from 'react-query';
+// import useFetch from '../hooks/useFetch';
 import RedditArticle from './RedditArticle';
 
 const Reddit = () => {
+	// const {
+	// 	data: posts,
+	// 	isPending,
+	// 	error,
+	// } = useFetch('https://www.reddit.com/r/aww.json');
+
 	const {
 		data: posts,
-		isPending,
+		isLoading,
+		isError,
 		error,
-	} = useFetch('https://www.reddit.com/r/aww.json');
+		isSuccess,
+	} = useQuery('posts', fetchPosts, {
+		refetchOnWindowFocus: false,
+	});
+
 	const [visible, setVisible] = useState(9);
+
+	function fetchPosts() {
+		return fetch('https://www.reddit.com/r/aww.json').then(response =>
+			response.json()
+		);
+	}
 
 	function loadMore() {
 		setVisible(visible + 9);
@@ -16,10 +34,12 @@ const Reddit = () => {
 
 	return (
 		<>
-			{isPending && <div className="loading">Fetching Reddit API data...</div>}
-			{error && <div className="error">{error || 'Something went wrong!'}</div>}
+			{isLoading && <div className="loading">Fetching Reddit API data...</div>}
+			{isError && (
+				<div className="error">{error.message || 'Something went wrong!'}</div>
+			)}
 
-			{posts && (
+			{isSuccess && (
 				<>
 					<div className="reddit-articles">
 						{posts.data.children
