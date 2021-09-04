@@ -1,25 +1,42 @@
+import axios from 'axios';
 import { useState } from 'react';
-import useFetch from '../hooks/useFetch';
+import { useQuery } from 'react-query';
 import RedditArticle from './RedditArticle';
 
 const Reddit = () => {
-	const {
-		data: posts,
-		isPending,
-		error,
-	} = useFetch('https://www.reddit.com/r/aww.json');
 	const [visible, setVisible] = useState(9);
 
-	function loadMore() {
+	const fetchPosts = async () => {
+		try {
+			const response = await axios.get('https://www.reddit.com/r/aww.json');
+			return response.data;
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const {
+		data: posts,
+		isLoading,
+		isError,
+		error,
+		isSuccess,
+	} = useQuery('posts', fetchPosts, {
+		refetchOnWindowFocus: false,
+	});
+
+	const loadMore = () => {
 		setVisible(visible + 9);
-	}
+	};
 
 	return (
 		<>
-			{isPending && <div className="loading">Fetching Reddit API data...</div>}
-			{error && <div className="error">{error || 'Something went wrong!'}</div>}
+			{isLoading && <div className="loading">Fetching Reddit API data...</div>}
+			{isError && (
+				<div className="error">{error.message || 'Something went wrong!'}</div>
+			)}
 
-			{posts && (
+			{isSuccess && (
 				<>
 					<div className="reddit-articles">
 						{posts.data.children
