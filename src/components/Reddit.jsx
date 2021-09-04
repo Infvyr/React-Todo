@@ -1,14 +1,19 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-// import useFetch from '../hooks/useFetch';
 import RedditArticle from './RedditArticle';
 
 const Reddit = () => {
-	// const {
-	// 	data: posts,
-	// 	isPending,
-	// 	error,
-	// } = useFetch('https://www.reddit.com/r/aww.json');
+	const [visible, setVisible] = useState(9);
+
+	const fetchPosts = async () => {
+		try {
+			const response = await axios.get('https://www.reddit.com/r/aww.json');
+			return response.data;
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	const {
 		data: posts,
@@ -20,17 +25,9 @@ const Reddit = () => {
 		refetchOnWindowFocus: false,
 	});
 
-	const [visible, setVisible] = useState(9);
-
-	function fetchPosts() {
-		return fetch('https://www.reddit.com/r/aww.json').then(response =>
-			response.json()
-		);
-	}
-
-	function loadMore() {
+	const loadMore = () => {
 		setVisible(visible + 9);
-	}
+	};
 
 	return (
 		<>
