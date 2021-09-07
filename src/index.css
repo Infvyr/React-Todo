@@ -374,6 +374,10 @@ a{
   color: darkblue;
 }
 
+label{
+  cursor: pointer;
+}
+
 .svg-icon{
   width: 24px;
   height: 24px;
@@ -396,6 +400,12 @@ a{
 .loading{
   text-align: center;
   font-size: 1.4rem;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 /* Articles */
@@ -500,12 +510,25 @@ a{
 
 .search-form{
   width: 100%;
-  /* max-width: calc((100% / 3) - 1rem); */
   max-width: 100%;
 }
 
 .search-form .todo-input{
   margin-top: 0.5rem;
+  padding-right: 44px;
+}
+
+.search-input-wrapper{
+  position: relative;
+}
+
+.svg-icon-search{
+  position: absolute;
+  top: 20px;
+  right: .8rem;
+  width: 24px;
+  height: 24px;
+  cursor: default;
 }
 
 /* Modal */
@@ -588,7 +611,6 @@ a{
 }
 
 .reddit-btn--filter:hover,
-.reddit-btn--filter:focus,
 .reddit-btn--filter.active{
   background-color: #6B7280;
   color: #fff;
