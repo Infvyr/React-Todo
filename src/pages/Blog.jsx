@@ -1,9 +1,9 @@
-import Reddit from '../components/Reddit';
+import Reddit from "../components/Reddit";
 
 export const Blog = () => {
-	return (
-		<div className="container">
-			<Reddit />
-		</div>
-	);
+  return (
+    <div className="container">
+      <Reddit />
+    </div>
+  );
 };
