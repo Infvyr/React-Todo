@@ -32,7 +32,7 @@ const Reddit = () => {
     setVisible(visible + 9);
   };
 
-  const handleChange = e => {
+  const handleSearch = e => {
     let searchedValue = e.target.value;
     searchedValue = searchedValue.trim().replace(/\s/g, "");
 
@@ -60,11 +60,11 @@ const Reddit = () => {
                 className="todo-input"
                 placeholder="search reddit articles..."
                 value={search}
-                onChange={handleChange}
+                onChange={handleSearch}
               />
             </div>
 
-            <RedditFilter />
+            <RedditFilter posts={filteredData} />
           </div>
 
           <div className="reddit-articles">
