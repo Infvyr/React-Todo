@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
 
-## Project live address: [go to app] (https://infvyr-react-todo-reddit-blog.netlify.app)
+## Project live address: [go to app](https://infvyr-react-todo-reddit-blog.netlify.app)
 
 ## Available Scripts
 
