@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Project live address:] https://infvyr-react-todo-reddit-blog.netlify.app/
 
 ## Available Scripts
 
