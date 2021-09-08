@@ -1,18 +1,37 @@
-const RedditFilter = ({ posts }) => {
+import { useContext } from "react";
+import { RedditPostsAPIContext } from "../context/RedditPostsAPIContext";
+
+const BlogFilter = () => {
+  const { filter, setFilter, filterPosts } = useContext(RedditPostsAPIContext);
+
   return (
     <div className="reddit-filter">
       <div className="reddit-filter__by-title reddit-filter-wrapper">
         <p>Filter by Title:</p>
         <button
           type="button"
-          className={`button reddit-btn--az reddit-btn--filter`}
-          // onClick={() => filterPosts("title", "asc")}
+          className={`button reddit-btn--az reddit-btn--filter ${
+            filter === "asc" ? "active" : ""
+          }`}
+          onClick={() => {
+            setFilter("asc");
+            filterPosts();
+            console.log(filter);
+          }}
         >
           A-Z
         </button>
         <button
           type="button"
-          className="button reddit-btn--za reddit-btn--filter"
+          className={`button reddit-btn--za reddit-btn--filter ${
+            filter === "desc" ? "active" : ""
+          }`}
+          onClick={() => {
+            setFilter("desc");
+
+            filterPosts();
+            console.log(filter);
+          }}
         >
           Z-A
         </button>
@@ -37,4 +56,4 @@ const RedditFilter = ({ posts }) => {
   );
 };
 
-export default RedditFilter;
+export default BlogFilter;
